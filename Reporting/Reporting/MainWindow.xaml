@@ -5,8 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Reporting"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="Reporting" Height="408" Width="800">
+    <Grid Height="379">
+        <TextBox x:Name="HomeAdress" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" Text="Put your home adress here" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="WorkAdress" HorizontalAlignment="Left" Height="25" Margin="10,40,0,0" Text="Put your work adress here" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <Button x:Name="HomeAdressSet" Content="Set" HorizontalAlignment="Left" Height="25" Margin="220,10,0,0" VerticalAlignment="Top" Width="50" Click="HomeAdressSet_Click"/>
+        <Button x:Name="WorkAdressSet" Content="Set" HorizontalAlignment="Left" Height="25" Margin="220,40,0,0" VerticalAlignment="Top" Width="50" Click="WorkAdressSet_Click"/>
+        <TextBlock x:Name="KilometersHomeWork" HorizontalAlignment="Left" Height="29" Margin="275,23,0,0" Text=" ... kilometers" TextWrapping="Wrap" VerticalAlignment="Top" Width="85"/>
+        <GroupBox Header="Make your trips" HorizontalAlignment="Left" Height="253" Margin="10,92,0,0" VerticalAlignment="Top" Width="350">
+        </GroupBox>
+        <TextBox x:Name="Origin" HorizontalAlignment="Left" Height="25" Margin="20,118,0,212" Text="set the origin" TextWrapping="Wrap" Width="200"/>
+        <TextBox x:Name="Destination" HorizontalAlignment="Left" Height="25" Margin="20,148,0,182" Text="set the destination" TextWrapping="Wrap" Width="200"/>
+        <Button x:Name="HomeAdressOrigin" Content="Home" HorizontalAlignment="Left" Height="25" Margin="225,118,0,0" VerticalAlignment="Top" Width="50" Click="HomeAdressOrigin_Click"/>
+        <Button x:Name="WorkAdressOrigin" Content="Work" HorizontalAlignment="Left" Height="25" Margin="280,118,0,0" VerticalAlignment="Top" Width="50" Click="WorkAdressOrigin_Click"/>
+        <Button x:Name="HomeAdressDestination" Content="Home" HorizontalAlignment="Left" Height="25" Margin="225,148,0,0" VerticalAlignment="Top" Width="50" Click="HomeAdressDestination_Click"/>
+        <Button x:Name="WorkAdressDestination" Content="Work" HorizontalAlignment="Left" Height="25" Margin="280,148,0,0" VerticalAlignment="Top" Width="50" Click="WorkAdressDestination_Click"/>
+        <ListBox x:Name="MovementCode" HorizontalAlignment="Left" Height="44" Margin="20,208,0,0" VerticalAlignment="Top" Width="310">
+            <ListBoxItem>DT</ListBoxItem>
+            <ListBoxItem>TD</ListBoxItem>
+            <ListBoxItem>MB</ListBoxItem>
+            <ListBoxItem>ME</ListBoxItem>
+        </ListBox>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="20,178,0,152" Text="Put your Movement Code:" TextWrapping="Wrap" Width="310"/>
+        <DatePicker x:Name="DateOfTrip" HorizontalAlignment="Left" Height="26" Margin="20,257,0,0" VerticalAlignment="Top" Width="310"/>
+        <Button x:Name="AddToYourReport" Content="Add to your report" HorizontalAlignment="Left" Height="30
+" Margin="20,288,0,0" VerticalAlignment="Top" Width="310" Click="AddToYourReport_Click"/>
+        <ListBox x:Name="Trips" HorizontalAlignment="Left" Height="283" Margin="400,0,0,0" VerticalAlignment="Top" Width="390">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="{Binding DateTrip}"></TextBlock>
+                            <TextBlock Text="{Binding Code}"></TextBlock>
+                            <TextBlock Text="{Binding From}"></TextBlock>
+                            <TextBlock Text="{Binding To}"></TextBlock>
+                            <TextBlock Text="{Binding Distance}"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="ExportInExcel" Content="Export in excel" HorizontalAlignment="Left" Height="57" Margin="400,288,0,0" VerticalAlignment="Top" Width="390" Click="ExportInExcel_Click"/>
     </Grid>
 </Window>
