@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Reporting.services;
+using Reporting.services.GoogleMapsMatrixService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,8 @@ namespace Reporting
         public MainWindow()
         {
             InitializeComponent();
+            GoogleMapsMatrixService googleMapsMatrixService = new GoogleMapsMatrixService("testApiKey");
+            _ = googleMapsMatrixService.GetKilometers("from", "to");
         }
     }
 }
