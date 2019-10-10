@@ -47,7 +47,7 @@ namespace Reporting.services.GoogleMapsMatrixService
                 HttpResponseMessage response = await _httpClient.GetAsync(url.ToString());
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var result = JsonSerializer.Deserialize<MatrixResult>(responseBody);
-                return result.rows[0].elements[0].distance.value / 100;
+                    return result.rows[0].elements[0].distance.value / 1000;
             }
             catch (HttpRequestException e)
             {
