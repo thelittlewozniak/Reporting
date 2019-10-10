@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Reporting"
         mc:Ignorable="d"
         Title="Reporting" Height="408" Width="800">
-    <Grid Height="355">
+    <Grid Height="379">
         <TextBox x:Name="HomeAdress" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" Text="Put your home adress here" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
         <TextBox x:Name="WorkAdress" HorizontalAlignment="Left" Height="25" Margin="10,40,0,0" Text="Put your work adress here" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
         <Button x:Name="HomeAdressSet" Content="Set" HorizontalAlignment="Left" Height="25" Margin="220,10,0,0" VerticalAlignment="Top" Width="50" Click="HomeAdressSet_Click"/>
@@ -30,5 +30,21 @@
         <DatePicker x:Name="DateOfTrip" HorizontalAlignment="Left" Height="26" Margin="20,257,0,0" VerticalAlignment="Top" Width="310"/>
         <Button x:Name="AddToYourReport" Content="Add to your report" HorizontalAlignment="Left" Height="30
 " Margin="20,288,0,0" VerticalAlignment="Top" Width="310" Click="AddToYourReport_Click"/>
+        <ListBox x:Name="Trips" HorizontalAlignment="Left" Height="283" Margin="400,0,0,0" VerticalAlignment="Top" Width="390">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="{Binding DateTrip}"></TextBlock>
+                            <TextBlock Text="{Binding Code}"></TextBlock>
+                            <TextBlock Text="{Binding From}"></TextBlock>
+                            <TextBlock Text="{Binding To}"></TextBlock>
+                            <TextBlock Text="{Binding Distance}"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="ExportInExcel" Content="Export in excel" HorizontalAlignment="Left" Height="57" Margin="400,288,0,0" VerticalAlignment="Top" Width="390" Click="ExportInExcel_Click"/>
     </Grid>
 </Window>

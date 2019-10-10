@@ -1,20 +1,9 @@
 ﻿using Reporting.model;
-using Reporting.services;
 using Reporting.services.GoogleMapsMatrixService;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using NsExcel = Microsoft.Office.Interop.Excel;
 
 namespace Reporting
 {
@@ -25,7 +14,7 @@ namespace Reporting
     {
         public string HomeAdressString { get; set; }
         public string WorkAdressString { get; set; }
-        public List<Trip> Report { get; set; }
+        public List<Trip> Report { get; set; } = new List<Trip>();
         private GoogleMapsMatrixService googleMapsMatrixService;
         public MainWindow()
         {
@@ -99,6 +88,53 @@ namespace Reporting
                 Distance = await this.googleMapsMatrixService.GetKilometers(this.Origin.Text, this.Destination.Text)
             };
             Report.Add(trip);
+            this.Trips.ItemsSource = null;
+            this.Trips.ItemsSource = Report;
+        }
+        public void ListToExcel(List<Trip> list)
+        {
+            NsExcel.ApplicationClass excapp = new Microsoft.Office.Interop.Excel.ApplicationClass();
+
+            excapp.Visible = true;
+
+            var workbook = excapp.Workbooks.Add(NsExcel.XlWBATemplate.xlWBATWorksheet);
+        
+            var sheet = (NsExcel.Worksheet)workbook.Sheets[1]; //indexing starts from 1
+
+            var range = sheet.get_Range("A1", "A1");
+            range.Value2 = "test";
+
+            //now the list
+            string cellName;
+            string cellNameB;
+            string cellNameC;
+            string cellNameD;
+            string cellNameE;
+            int counter = 1;
+            foreach (var item in list)
+            {
+                cellName = "A" + counter.ToString();
+                cellNameB = "B" + counter.ToString();
+                cellNameC = "C" + counter.ToString();
+                cellNameD = "D" + counter.ToString();
+                cellNameE = "E" + counter.ToString();
+                var range1 = sheet.get_Range(cellName, cellName);
+                var range2 = sheet.get_Range(cellNameB, cellNameB);
+                var range3 = sheet.get_Range(cellNameC, cellNameC);
+                var range4 = sheet.get_Range(cellNameD, cellNameD);
+                var range5 = sheet.get_Range(cellNameE, cellNameE);
+                range1.Value2 = item.DateTrip.ToString();
+                range2.Value2 = item.Code.ToString();
+                range3.Value2 = item.From.ToString();
+                range4.Value2 = item.To.ToString();
+                range5.Value2 = item.Distance.ToString();
+                ++counter;
+            }
+        }
+
+        private void ExportInExcel_Click(object sender, RoutedEventArgs e)
+        {
+            this.ListToExcel(this.Report);
         }
     }
 }
