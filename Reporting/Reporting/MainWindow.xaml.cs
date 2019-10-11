@@ -93,9 +93,10 @@ namespace Reporting
         }
         public void ListToExcel(List<Trip> list)
         {
-            NsExcel.ApplicationClass excapp = new Microsoft.Office.Interop.Excel.ApplicationClass();
-
-            excapp.Visible = true;
+            NsExcel.Application excapp = new NsExcel.Application
+            {
+                Visible = true
+            };
 
             var workbook = excapp.Workbooks.Add(NsExcel.XlWBATemplate.xlWBATWorksheet);
         
@@ -107,27 +108,31 @@ namespace Reporting
             //now the list
             string cellName;
             string cellNameB;
-            string cellNameC;
+            string cellNameF;
             string cellNameD;
             string cellNameE;
+            string cellNameG;
             int counter = 1;
             foreach (var item in list)
             {
                 cellName = "A" + counter.ToString();
                 cellNameB = "B" + counter.ToString();
-                cellNameC = "C" + counter.ToString();
                 cellNameD = "D" + counter.ToString();
                 cellNameE = "E" + counter.ToString();
+                cellNameF = "F" + counter.ToString();
+                cellNameG = "G" + counter.ToString();
                 var range1 = sheet.get_Range(cellName, cellName);
                 var range2 = sheet.get_Range(cellNameB, cellNameB);
-                var range3 = sheet.get_Range(cellNameC, cellNameC);
-                var range4 = sheet.get_Range(cellNameD, cellNameD);
+                var range4 = sheet.get_Range(cellNameF, cellNameF);
+                var range3 = sheet.get_Range(cellNameD, cellNameD);
                 var range5 = sheet.get_Range(cellNameE, cellNameE);
-                range1.Value2 = item.DateTrip.ToString();
+                var range6 = sheet.get_Range(cellNameG, cellNameG);
+                range1.Value2 = item.DateTrip.Value.ToShortDateString();
                 range2.Value2 = item.Code.ToString();
                 range3.Value2 = item.From.ToString();
-                range4.Value2 = item.To.ToString();
-                range5.Value2 = item.Distance.ToString();
+                range4.Value2 = "voiture";
+                range5.Value2 = item.To.ToString();
+                range6.Value2 = item.Distance.ToString();
                 ++counter;
             }
         }
